@@ -1,7 +1,6 @@
 const menuContainer = document.querySelector("#menu-container");
-const cartContainer = document.querySelector("#shopping-cart")
+const cartContainer = document.querySelector("#shopping-cart");
 console.log(cartContainer);
-
 
 // showing the menu or food cards  =====>
 function displayMenu(items) {
@@ -30,12 +29,32 @@ function displayMenu(items) {
     .join("");
 }
 
+// showing the cart =====>
+function displayCart() {
+  if (cart.length === 0) {
+    cartContainer.innerHTML = `<h2>Shopping Cart</h2><p>Your cart is empty.</p>`;
+    return;
+  } 
+
+const cartHTML = cart.map((item) => {
+    return `
+      <div class="cart-item">
+        <h5>${item.name}</h5>
+        <p>Qty: ${item.quantity}</p>
+        <p>$${(item.price * item.quantity).toFixed(2)}</p>
+      </div>
+    `;
+  }).join(" ");
+  cartContainer.innerHTML = `<h2>Shopping Cart</h2>` + cartHTML;
+}
+
 displayMenu(menuItems);
 
 // create cart array=====>
 const cart = [];
 
 menuContainer.addEventListener("click", (event) => {
+
   const id = Number(event.target.dataset.id);
 
   if (!id) return;
@@ -51,12 +70,8 @@ menuContainer.addEventListener("click", (event) => {
     cart.push(newItem);
   }
   console.log(cart);
+  displayCart();
 });
 
 
-// showing the cart =====>
-  function displayCart () {
-    if(cart.length===0){
-      cartContainer.innerHTML=`<h2>Shopping Cart</h2><p>Your cart is empty.</p>`;
-    }
-  }
+
