@@ -32,20 +32,38 @@ function displayMenu(items) {
 // showing the cart =====>
 function displayCart() {
   if (cart.length === 0) {
-    cartContainer.innerHTML = `<h2>Shopping Cart</h2><p>Your cart is empty.</p>`;
+    cartContainer.innerHTML = "<div><h2>Shopping Cart</h2><p>Your cart is empty.</p></div>";
     return;
   } 
 
 const cartHTML = cart.map((item) => {
     return `
-      <div class="cart-item">
-        <h5>${item.name}</h5>
-        <p>Qty: ${item.quantity}</p>
-        <p>$${(item.price * item.quantity).toFixed(2)}</p>
+<div class="cart-item">
+        <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+        
+        <div class="cart-item-details">
+          <h5>${item.name}</h5>
+          <p>Qty: ${item.quantity}</p>
+          <p>$${(item.price * item.quantity).toFixed(2)}</p>
+        </div>
       </div>
     `;
   }).join(" ");
-  cartContainer.innerHTML = `<h2>Shopping Cart</h2>` + cartHTML;
+
+  const totalAmount = cart.reduce((accumulator, item) => {
+    return accumulator + (item.price * item.quantity);
+  }, 0);
+
+  console.log(totalAmount);
+
+  cartContainer.innerHTML = `
+    <h2>Shopping Cart</h2>
+    ${cartHTML}
+    <div class="cart-total-container">
+      <h3>Total:</h3>
+      <h3 id="cart-total-amount">$${totalAmount.toFixed(2)}</h3>
+    </div>
+  `;
 }
 
 displayMenu(menuItems);

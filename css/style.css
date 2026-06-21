@@ -80,7 +80,6 @@ header input {
 .name-veg-container{
   display: flex;
   justify-content: space-between;
-  border: white 1px solid;
 }
 
 .name-veg-container h4{
@@ -93,6 +92,43 @@ header input {
 .logo {
   color: var(--accent);
 }
+
+/* ===== Shopping Cart Styles ===== */
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #3a3d44;
+}
+
+.cart-item-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.cart-item-details {
+  flex-grow: 1;
+}
+
+.cart-total-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 2px dashed #3a3d44; /* Creates a neat receipt divider effect */
+}
+
+#cart-total-amount {
+  color: var(--accent); /* Keeps our gold accent highlight */
+} 
+
+/* ==================================== X tham beta X ============================ */
+
+
 
 /* ===== responsiveness ==== */
 @media (max-width: 992px) {
