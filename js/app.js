@@ -1,6 +1,6 @@
 const menuContainer = document.querySelector("#menu-container");
 const cartContainer = document.querySelector("#shopping-cart");
-console.log(cartContainer);
+const searchInput = document.querySelector("header input");
 
 // showing the menu or food cards  =====>
 function displayMenu(items) {
@@ -51,10 +51,9 @@ const cartHTML = cart.map((item) => {
   }).join(" ");
 
   const totalAmount = cart.reduce((accumulator, item) => {
+
     return accumulator + (item.price * item.quantity);
   }, 0);
-
-  console.log(totalAmount);
 
   cartContainer.innerHTML = `
     <h2>Shopping Cart</h2>
@@ -67,6 +66,18 @@ const cartHTML = cart.map((item) => {
 }
 
 displayMenu(menuItems);
+
+function displaySearchItems (searchItem) {
+  console.log(searchItem);
+  const selectedSearchItems = menuItems.filter(item => item.name.toLowerCase().includes(searchItem))
+  console.log(selectedSearchItems);
+  displayMenu(selectedSearchItems)
+}
+
+searchInput.addEventListener("input", (event)=>{
+  const searchItem = event.target.value.toLowerCase()
+  displaySearchItems(searchItem)
+})
 
 // create cart array=====>
 const cart = [];
@@ -90,6 +101,7 @@ menuContainer.addEventListener("click", (event) => {
   console.log(cart);
   displayCart();
 });
+
 
 
 
